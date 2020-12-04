@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.example.philipshuelampapp.model.Lamp;
+import com.example.philipshuelampapp.model.Product;
 import com.example.philipshuelampapp.service.network.HueEmulatorService;
 import com.example.philipshuelampapp.service.network.IHueEmulatorServiceListener;
 import com.example.philipshuelampapp.ui.LampAdapter;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements IHueEmulatorServiceListener {
     private static final String LOGTAG = MainActivity.class.getName();
     private RecyclerView lampRecyclerView;
-    private RecyclerView.Adapter adapter;
+    private LampAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     private HueEmulatorService hueEmulatorService;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements IHueEmulatorServi
 
         hueEmulatorService.getLights();
         ArrayList<LampItem> LampItems = new ArrayList<>();
-        LampItems.add(new LampItem("YAAA", 0));
+        LampItems.add(new LampItem(new Product())); // test
 
         lampRecyclerView = findViewById(R.id.LampRecycler);
         lampRecyclerView.setHasFixedSize(true);
@@ -41,6 +42,13 @@ public class MainActivity extends AppCompatActivity implements IHueEmulatorServi
 
         lampRecyclerView.setLayoutManager(layoutManager);
         lampRecyclerView.setAdapter(adapter);
+
+//        adapter.setOnItemClickListener(new LampAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position) {
+//
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();            }
+//        });
     }
 
     @Override
