@@ -21,13 +21,14 @@ public class MainActivity extends AppCompatActivity implements IHueEmulatorServi
     private RecyclerView.LayoutManager layoutManager;
 
     private HueEmulatorService hueEmulatorService;
+    private Lamp lamps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        hueEmulatorService = new HueEmulatorService(this, this);
+        hueEmulatorService = new HueEmulatorService(this);
 
         hueEmulatorService.getLights();
         ArrayList<LampItem> LampItems = new ArrayList<>();
@@ -43,12 +44,25 @@ public class MainActivity extends AppCompatActivity implements IHueEmulatorServi
     }
 
     @Override
-    public void onLampsReceived(Lamp lamp) {
+    public void onLampsReceived(Lamp newLamps) {
+        lamps = newLamps;
+        hueEmulatorService.setLightSaturation("1", 0);
+        hueEmulatorService.setLightHue("2", 46920);
+        hueEmulatorService.setLightBrightness("3", 60);
+    }
+
+    @Override
+    public void onLampsError(Lamp newLamps) {
+        lamps = newLamps;
+    }
+
+    @Override
+    public void onActionSuccess() {
 
     }
 
     @Override
-    public void onLampsError() {
+    public void onActionError() {
 
     }
 }
