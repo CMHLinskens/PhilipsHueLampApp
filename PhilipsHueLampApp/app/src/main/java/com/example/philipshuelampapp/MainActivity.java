@@ -13,6 +13,7 @@ import com.example.philipshuelampapp.service.network.HueEmulatorService;
 import com.example.philipshuelampapp.service.network.IHueEmulatorServiceListener;
 import com.example.philipshuelampapp.ui.LampAdapter;
 import com.example.philipshuelampapp.ui.LampItem;
+import com.example.philipshuelampapp.ui.ListFragment;
 
 import org.json.JSONObject;
 
@@ -23,12 +24,10 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity implements IHueEmulatorServiceListener {
     private static final String LOGTAG = MainActivity.class.getName();
-    private RecyclerView lampRecyclerView;
-    private LampAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
+    private Lamp lamps;
 
     private HueEmulatorService hueEmulatorService;
-    private Lamp lamps;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,23 +37,10 @@ public class MainActivity extends AppCompatActivity implements IHueEmulatorServi
         hueEmulatorService = new HueEmulatorService(this);
 
         hueEmulatorService.getLights();
-        ArrayList<LampItem> LampItems = new ArrayList<>();
-        LampItems.add(new LampItem(new Product())); // test
+        ListFragment listFragment = new ListFragment(lamps);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, listFragment).commit();
 
-        lampRecyclerView = findViewById(R.id.LampRecycler);
-        lampRecyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        adapter = new LampAdapter(LampItems);
 
-        lampRecyclerView.setLayoutManager(layoutManager);
-        lampRecyclerView.setAdapter(adapter);
-
-//        adapter.setOnItemClickListener(new LampAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();            }
-//        });
     }
 
     @Override
