@@ -139,20 +139,40 @@ public class HueEmulatorService implements IHueEmulatorService{
         sendActionRequestOnNewThread(saturationChangeRequest);
     }
 
+    @Override
+    public void setLightName(String id, String name) {
+        // Form the uri
+        final String uri = bridgeUri + username + category + "/"+id;
+
+        // Create params
+        JSONObject params = new JSONObject();
+        try {
+            params.put("name", name);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(params.toString(), JSON);
+
+        // Create request
+        final Request nameChangeRequest = new Request.Builder().url(uri).put(body).build();
+
+        // Send request on new thread
+        sendActionRequestOnNewThread(nameChangeRequest);
+    }
+
     private void sendActionRequestOnNewThread(Request httpRequest){
         // Send request on new thread
         new Thread(() -> {
             try (Response response = client.newCall(httpRequest).execute()){
                 // Im using FasterXML Jackson to map JSON
                 Log.d(LOGTAG, response.body().toString());
-                listener.onActionSuccess();
+                listener.onActionSuccess(response.body().string());
             } catch (IOException e) {
                 Log.d(LOGTAG, e.getLocalizedMessage());
-                listener.onActionSuccess();
+                listener.onActionError();
             }
         }).start();
     }
-
 
     public void setBridgeUri(String bridgeUri) {
         this.bridgeUri = bridgeUri;

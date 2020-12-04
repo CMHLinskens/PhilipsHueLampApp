@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.philipshuelampapp.model.Lamp;
 import com.example.philipshuelampapp.model.Product;
@@ -13,7 +14,12 @@ import com.example.philipshuelampapp.service.network.IHueEmulatorServiceListener
 import com.example.philipshuelampapp.ui.LampAdapter;
 import com.example.philipshuelampapp.ui.LampItem;
 
+import org.json.JSONObject;
+
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity implements IHueEmulatorServiceListener {
     private static final String LOGTAG = MainActivity.class.getName();
@@ -54,9 +60,8 @@ public class MainActivity extends AppCompatActivity implements IHueEmulatorServi
     @Override
     public void onLampsReceived(Lamp newLamps) {
         lamps = newLamps;
-        hueEmulatorService.setLightSaturation("1", 0);
-        hueEmulatorService.setLightHue("2", 46920);
-        hueEmulatorService.setLightBrightness("3", 60);
+        hueEmulatorService.setLightName("1", "barry");
+        hueEmulatorService.setLightBrightness("3", 254);
     }
 
     @Override
@@ -65,8 +70,22 @@ public class MainActivity extends AppCompatActivity implements IHueEmulatorServi
     }
 
     @Override
-    public void onActionSuccess() {
+    public void onActionSuccess(String response) {
+        Scanner reader = new Scanner(response);
+        reader.useDelimiter("/");
 
+        String lampId = "";
+        String change = "";
+        while(reader.hasNext()){
+            String next = reader.next();
+            if(next.matches("[0-9]"))
+                lampId = next;
+            else if(!reader.hasNext()){
+                change = next;
+            }
+        }
+
+        Log.d(LOGTAG, lampId + " has changed " + change);
     }
 
     @Override

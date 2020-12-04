@@ -6,6 +6,7 @@ public interface IHueEmulatorService {
     void setLightBrightness(String id, int value);
     void setLightHue(String id, int value);
     void setLightSaturation(String id, int value);
+    void setLightName(String id, String name);
     void setBridgeUri(String uri);
     void setUsername(String username);
 }
