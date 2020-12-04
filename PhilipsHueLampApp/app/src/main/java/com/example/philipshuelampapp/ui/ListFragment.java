@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.philipshuelampapp.ILampManager;
 import com.example.philipshuelampapp.MainActivity;
 import com.example.philipshuelampapp.R;
 import com.example.philipshuelampapp.model.Lamp;
@@ -20,11 +22,12 @@ import com.example.philipshuelampapp.model.Product;
 import java.util.ArrayList;
 
 public class ListFragment extends Fragment {
-    private Context context;
     private RecyclerView lampRecyclerView;
+    private ILampManager lampManager;
     private LampAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private Lamp lamps;
+
 
     @Nullable
     @Override
@@ -32,7 +35,7 @@ public class ListFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.lamplist_fragment, container, false);
         ArrayList<LampItem> LampItems = new ArrayList<>();
-        LampItems.add(new LampItem(new Product())); // test
+//        LampItems.add(new LampItem(new Product())); // test
 
         lampRecyclerView = rootView.findViewById(R.id.LampRecycler);
         lampRecyclerView.setHasFixedSize(true);
@@ -42,17 +45,23 @@ public class ListFragment extends Fragment {
         lampRecyclerView.setLayoutManager(layoutManager);
         lampRecyclerView.setAdapter(adapter);
 
-        //        adapter.setOnItemClickListener(new LampAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position) {
-//
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();            }
-//        });
-
+        adapter.setOnItemClickListener(new LampAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                ((FragmentActivity) rootView.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LampFragment()).commit();
+            }
+        });
         return rootView;
     }
 
-    public ListFragment(Lamp lamps) {
-        this.lamps = lamps;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof ILampManager) {
+            lampManager = (ILampManager) context;
+            lamps = lampManager.getLamps();
+        } else {
+            throw new RuntimeException("Not an instanceOf ILampManager");
+        }
     }
 }

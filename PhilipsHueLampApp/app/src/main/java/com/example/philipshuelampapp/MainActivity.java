@@ -22,7 +22,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MainActivity extends AppCompatActivity implements IHueEmulatorServiceListener {
+public class MainActivity extends AppCompatActivity implements IHueEmulatorServiceListener, ILampManager {
     private static final String LOGTAG = MainActivity.class.getName();
     private Lamp lamps;
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements IHueEmulatorServi
         hueEmulatorService = new HueEmulatorService(this);
 
         hueEmulatorService.getLights();
-        ListFragment listFragment = new ListFragment(lamps);
+        ListFragment listFragment = new ListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, listFragment).commit();
 
 
@@ -77,5 +77,10 @@ public class MainActivity extends AppCompatActivity implements IHueEmulatorServi
     @Override
     public void onActionError() {
 
+    }
+
+    @Override
+    public Lamp getLamps() {
+        return lamps;
     }
 }
