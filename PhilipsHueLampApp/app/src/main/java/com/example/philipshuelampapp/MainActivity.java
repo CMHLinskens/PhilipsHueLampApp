@@ -5,26 +5,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.philipshuelampapp.model.Lamp;
-import com.example.philipshuelampapp.model.Product;
 import com.example.philipshuelampapp.service.network.HueEmulatorService;
-import com.example.philipshuelampapp.service.network.IHueEmulatorServiceListener;
 import com.example.philipshuelampapp.ui.LampAdapter;
 import com.example.philipshuelampapp.ui.LampItem;
 import com.example.philipshuelampapp.ui.ListFragment;
 
-import org.json.JSONObject;
-
-import java.io.Reader;
-import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class MainActivity extends AppCompatActivity implements IHueEmulatorServiceListener, ILampManager {
+public class MainActivity extends AppCompatActivity implements ILampManager {
     private static final String LOGTAG = MainActivity.class.getName();
     private Lamp lamps;
+    private ArrayList<LampItem> lampItems = new ArrayList<>();
 
     private HueEmulatorService hueEmulatorService;
 
@@ -34,53 +27,19 @@ public class MainActivity extends AppCompatActivity implements IHueEmulatorServi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        hueEmulatorService = new HueEmulatorService(this);
+        hueEmulatorService = new HueEmulatorService();
+        lamps = hueEmulatorService.getLights();
 
-        hueEmulatorService.getLights();
         ListFragment listFragment = new ListFragment();
+        lampItems = new ArrayList<>();
+        lampItems.add(new LampItem(lamps.getProduct()));
+        lampItems.add(new LampItem(lamps.getProduct2()));
+        lampItems.add(new LampItem(lamps.getProduct3()));
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, listFragment).commit();
 
-
     }
-
     @Override
-    public void onLampsReceived(Lamp newLamps) {
-        lamps = newLamps;
-        hueEmulatorService.setLightName("1", "barry");
-        hueEmulatorService.setLightBrightness("3", 254);
-    }
-
-    @Override
-    public void onLampsError(Lamp newLamps) {
-        lamps = newLamps;
-    }
-
-    @Override
-    public void onActionSuccess(String response) {
-        Scanner reader = new Scanner(response);
-        reader.useDelimiter("/");
-
-        String lampId = "";
-        String change = "";
-        while(reader.hasNext()){
-            String next = reader.next();
-            if(next.matches("[0-9]"))
-                lampId = next;
-            else if(!reader.hasNext()){
-                change = next;
-            }
-        }
-
-        Log.d(LOGTAG, lampId + " has changed " + change);
-    }
-
-    @Override
-    public void onActionError() {
-
-    }
-
-    @Override
-    public Lamp getLamps() {
-        return lamps;
+    public ArrayList<LampItem> getLamps() {
+        return lampItems;
     }
 }

@@ -1,7 +1,9 @@
 package com.example.philipshuelampapp.service.network;
 
+import com.example.philipshuelampapp.model.Lamp;
+
 public interface IHueEmulatorService {
-    void getLights();
+    Lamp getLights();
     void setLightPowerState(String id, boolean state);
     void setLightBrightness(String id, int value);
     void setLightHue(String id, int value);

@@ -26,7 +26,7 @@ public class ListFragment extends Fragment {
     private ILampManager lampManager;
     private LampAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private Lamp lamps;
+    private ArrayList<LampItem> lamps;
 
 
     @Nullable
@@ -34,13 +34,12 @@ public class ListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.lamplist_fragment, container, false);
-        ArrayList<LampItem> LampItems = new ArrayList<>();
 //        LampItems.add(new LampItem(new Product())); // test
 
         lampRecyclerView = rootView.findViewById(R.id.LampRecycler);
         lampRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this.getContext());
-        adapter = new LampAdapter(LampItems);
+        adapter = new LampAdapter(lamps);
 
         lampRecyclerView.setLayoutManager(layoutManager);
         lampRecyclerView.setAdapter(adapter);
