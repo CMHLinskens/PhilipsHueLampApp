@@ -1,5 +1,6 @@
 package com.example.philipshuelampapp.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,12 @@ public class LampFragment extends Fragment {
         View view = inflater.inflate(R.layout.lamp_fragment, container, false);
 
         return view;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
     }
 
     public Product getLamp() { return this.lamp; }
