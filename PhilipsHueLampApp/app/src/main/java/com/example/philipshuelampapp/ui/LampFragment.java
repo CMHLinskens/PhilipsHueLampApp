@@ -18,12 +18,8 @@ public class LampFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.lamp_fragment, container);
+        View view = inflater.inflate(R.layout.lamp_fragment, container, false);
 
         return view;
-    }
-
-    public LampFragment(Product lamp) {
-        this.lamp = lamp;
     }
 }

@@ -1,6 +1,9 @@
 package com.example.philipshuelampapp.ui;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.philipshuelampapp.model.Capabilities;
 import com.example.philipshuelampapp.model.Config;
 import com.example.philipshuelampapp.model.Product;
