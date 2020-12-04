@@ -43,6 +43,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    testImplementation "com.squareup.okhttp3:mockwebserver:4.9.0"
+
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.3'
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
 }
