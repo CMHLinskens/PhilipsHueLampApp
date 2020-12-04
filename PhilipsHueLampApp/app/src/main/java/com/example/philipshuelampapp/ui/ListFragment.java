@@ -63,4 +63,6 @@ public class ListFragment extends Fragment {
             throw new RuntimeException("Not an instanceOf ILampManager");
         }
     }
+
+    public LampAdapter getAdapter() { return this.adapter; }
 }

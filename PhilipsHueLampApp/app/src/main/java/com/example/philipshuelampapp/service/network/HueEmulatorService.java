@@ -57,6 +57,8 @@ public class HueEmulatorService implements IHueEmulatorService{
             return (Lamp)(task.execute().get());
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            return new Lamp();
         }
 //        new Thread(() -> {
 //            try (Response response = client.newCall(allLightsRequest).execute()){

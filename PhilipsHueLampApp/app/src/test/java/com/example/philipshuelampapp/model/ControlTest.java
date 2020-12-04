@@ -1,11 +1,12 @@
 package com.example.philipshuelampapp.model;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ControlTest {
     @Test
@@ -13,14 +14,16 @@ public class ControlTest {
         int mindimlevel = 100;
         Control control = new Control();
         control.setMindimlevel(mindimlevel);
-        assertEquals(control.getMindimlevel(), mindimlevel);
+        boolean check = control.getMindimlevel() == mindimlevel;
+        assertTrue(check);
     }
     @Test
     public void test_control_maxlumen() {
         int maxlumen = 50;
         Control control = new Control();
         control.setMaxlumen(maxlumen);
-        assertEquals(control.getMaxlumen(), maxlumen);
+        boolean check = control.getMaxlumen() == maxlumen;
+        assertTrue(check);
     }
     @Test
     public void test_control_colorgamuttype() {

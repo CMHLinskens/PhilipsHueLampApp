@@ -22,4 +22,6 @@ public class LampFragment extends Fragment {
 
         return view;
     }
+
+    public Product getLamp() { return this.lamp; }
 }

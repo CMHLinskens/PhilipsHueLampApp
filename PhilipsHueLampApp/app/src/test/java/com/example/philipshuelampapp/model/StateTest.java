@@ -1,11 +1,11 @@
 package com.example.philipshuelampapp.model;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class StateTest {
     @Test
@@ -20,21 +20,24 @@ public class StateTest {
         int brightness = 155;
         State state = new State();
         state.setBri(brightness);
-        assertEquals(state.getBri(), brightness);
+        boolean check = state.getBri() == brightness;
+        assertTrue(check);
     }
     @Test
     public void test_state_hue() {
         int hue = 25555;
         State state = new State();
         state.setHue(hue);
-        assertEquals(state.getHue(), hue);
+        boolean check = state.getHue() == hue;
+        assertTrue(check);
     }
     @Test
     public void test_state_sat() {
         int saturation = 25555;
         State state = new State();
         state.setSat(saturation);
-        assertEquals(state.getSat(), saturation);
+        boolean check = state.getSat() == saturation;
+        assertTrue(check);
     }
     @Test
     public void test_state_effect() {
@@ -55,7 +58,8 @@ public class StateTest {
         int ct = 2;
         State state = new State();
         state.setCt(ct);
-        assertEquals(state.getCt(), ct);
+        boolean check = state.getCt() == ct;
+        assertTrue(check);
     }
     @Test
     public void test_state_alert() {
