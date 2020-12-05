@@ -66,16 +66,18 @@ public class LampFragment extends Fragment {
 
     private void initializeSliders(View view, Product lamp){
         colorSlider = view.findViewById(R.id.colorSlider);
-        colorSlider.setProgress((int) (lamp.getState().getHue() / 65534.0));
+        colorSlider.setProgress((int) ((lamp.getState().getHue() * 100) / 65534.0));
         brightnessSlider = view.findViewById(R.id.brightnessSlider);
-        brightnessSlider.setProgress((int) (lamp.getState().getBri() / 254.0));
+        brightnessSlider.setProgress((int) ((lamp.getState().getBri() * 100) / 254.0));
         saturationSlider = view.findViewById(R.id.saturationSlider);
-        saturationSlider.setProgress((int) (lamp.getState().getSat() / 254.0));
+        saturationSlider.setProgress((int) ((lamp.getState().getSat() * 100) / 254.0));
 
         colorSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                lampManager.setHue(lamp, progress * 65534);
+                int newHueValue = (int)((progress/100.0) * 65534);
+                colorTextView.setText(getString(R.string.color) + " " + newHueValue);
+                lampManager.setHue(lamp, newHueValue);
             }
 
             @Override
@@ -90,7 +92,9 @@ public class LampFragment extends Fragment {
         brightnessSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                lampManager.setBrightness(lamp, progress * 254);
+                int newBrightnessValue = (int)((progress/100.0) * 254);
+                brightnessTextView.setText(getString(R.string.brightness) + " " + newBrightnessValue);
+                lampManager.setBrightness(lamp, newBrightnessValue);
             }
 
             @Override
@@ -103,7 +107,9 @@ public class LampFragment extends Fragment {
         saturationSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                lampManager.setSaturation(lamp, progress * 254);
+                int newSaturationValue = (int)((progress/100.0) * 254);
+                saturationTextView.setText(getString(R.string.saturation) + " " + newSaturationValue);
+                lampManager.setSaturation(lamp, newSaturationValue);
             }
 
             @Override
@@ -117,37 +123,34 @@ public class LampFragment extends Fragment {
     private void initializeTextViews(View view, Product lamp) {
         nameTextView = view.findViewById(R.id.nameTextView);
         modelIDTextView = view.findViewById(R.id.modelIDTextView);
-        productNameTextView = view.findViewById(R.id.productNameTextView);
-        stateTextView = view.findViewById(R.id.stateTextView);
+//        productNameTextView = view.findViewById(R.id.productNameTextView);
         iDTextView = view.findViewById(R.id.iDTextView);
         colorTextView = view.findViewById(R.id.colorTextView);
         brightnessTextView = view.findViewById(R.id.brightnessTextView);
         saturationTextView = view.findViewById(R.id.saturationTextView);
 
-        String name = getString(R.string.name) + lamp.getName();
+        String name = lamp.getName();
         nameTextView.setText(name);
-        String modelID = getString(R.string.modelID) + lamp.getModelid();
+        String modelID = getString(R.string.modelID) + " " + lamp.getModelid();
         modelIDTextView.setText(modelID);
-        String productName = getString(R.string.productName) + lamp.getProductname();
-        productNameTextView.setText(productName);
-        String state = getString(R.string.state) + lamp.getState();
-        stateTextView.setText(state);
-        String uniqueID = "Unique ID: " + lamp.getUniqueid();
+//        String productName = getString(R.string.productName) + lamp.getProductname();
+//        productNameTextView.setText(productName);
+        String uniqueID = getString(R.string.ID) + " " + lamp.getUniqueid();
         iDTextView.setText(uniqueID);
-        String color = getString(R.string.color) + "?";
+        String color = getString(R.string.color) + " " + lamp.getState().getHue();
         colorTextView.setText(color);
-        String brightness = getString(R.string.brightness) + "?";
+        String brightness = getString(R.string.brightness) + " " + lamp.getState().getBri();
         brightnessTextView.setText(brightness);
-        String saturation = getString(R.string.saturation) + "?";
+        String saturation = getString(R.string.saturation) + " " + lamp.getState().getSat();
         saturationTextView.setText(saturation);
     }
 
     private void initializeButtons(View view, Product lamp) {
         powerButton = view.findViewById(R.id.powerButton);
         if (lamp.getState().getOn())
-            powerButton.setText(getString(R.string.turn_on));
-        else
             powerButton.setText(getString(R.string.turn_off));
+        else
+            powerButton.setText(getString(R.string.turn_on));
 
         powerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +162,11 @@ public class LampFragment extends Fragment {
                 else {
                     lampManager.setPowerState(lamp, true);
                     powerButton.setText(getString(R.string.turn_off));
+
+                    // Set the lamp to the latest values
+                    lampManager.setHue(lamp, lamp.getState().getHue());
+                    lampManager.setBrightness(lamp, lamp.getState().getBri());
+                    lampManager.setSaturation(lamp, lamp.getState().getSat());
                 }
             }
         });

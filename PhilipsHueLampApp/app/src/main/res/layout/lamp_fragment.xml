@@ -20,16 +20,6 @@
         />
 
     <TextView
-        android:id="@+id/stateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="State: "
-        android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/iDTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="20dp"/>
-
-    <TextView
         android:id="@+id/iDTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -162,25 +152,25 @@
         android:layout_marginBottom="30dp"
         android:text="@string/turn_on"/>
 
-    <TextView
-        android:id="@+id/productNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product name: "
-        android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/stateTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="20dp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/productNameTextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Product name: "-->
+<!--        android:textSize="26sp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/iDTextView"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:layout_marginLeft="20dp"/>-->
 
-    <TextView
-        android:id="@+id/manufacturerNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Manufacturer name: "
-        android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/productNameTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="20dp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/manufacturerNameTextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Manufacturer name: "-->
+<!--        android:textSize="26sp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/productNameTextView"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:layout_marginLeft="20dp"/>-->
 
     <TextView
         android:id="@+id/modelIDTextView"
@@ -189,7 +179,7 @@
         android:layout_marginStart="20dp"
         android:text="ModelID: "
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/manufacturerNameTextView"
+        app:layout_constraintBottom_toTopOf="@+id/iDTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView"
         app:layout_constraintVertical_bias="1.0" />
