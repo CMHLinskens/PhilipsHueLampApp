@@ -35,7 +35,7 @@ public class LampFragment extends Fragment {
     private SeekBar brightnessSlider;
     private SeekBar saturationSlider;
     private Button powerButton;
-    private boolean power;
+
 
 
     @Nullable

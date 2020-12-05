@@ -33,7 +33,7 @@ public class Control {
     @JsonProperty("ct")
     private com.example.philipshuelampapp.model.Ct ct;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("mindimlevel")
     public Integer getMindimlevel() {

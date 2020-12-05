@@ -26,7 +26,7 @@ public class Capabilities {
     @JsonProperty("streaming")
     private Streaming streaming;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("certified")
     public Boolean getCertified() {

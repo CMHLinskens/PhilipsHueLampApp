@@ -50,7 +50,7 @@ public class Product {
     @JsonProperty("swversion")
     private String swversion;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("state")
     public State getState() {
