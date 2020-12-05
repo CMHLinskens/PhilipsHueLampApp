@@ -23,10 +23,10 @@ public class HueEmulatorService implements IHueEmulatorService{
     private static final String LOGTAG = HueEmulatorService.class.getSimpleName();
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    private OkHttpClient client = new OkHttpClient();
+    private final OkHttpClient client = new OkHttpClient();
     private String bridgeUri = "http://10.0.2.2:80/api/";
     private String username = "newdeveloper";
-    private String category = "/lights";
+    private final String category = "/lights";
 
     @Override
     public Lamp getLights() {

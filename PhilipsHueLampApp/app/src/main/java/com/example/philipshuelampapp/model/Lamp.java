@@ -29,7 +29,7 @@ public class Lamp {
     private com.example.philipshuelampapp.model.Product product3;
 
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("1")
     public com.example.philipshuelampapp.model.Product getProduct() {

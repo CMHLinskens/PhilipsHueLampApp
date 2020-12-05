@@ -13,7 +13,7 @@ import com.example.philipshuelampapp.R;
 import java.util.ArrayList;
 
 public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder> {
-    private ArrayList<LampItem> lampItems;
+    private final ArrayList<LampItem> lampItems;
     private OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener{

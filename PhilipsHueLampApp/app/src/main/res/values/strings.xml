@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">PhilipsHueLampApp</string>
+    <string name="color">Hue: </string>
+    <string name="brightness">Brightness: </string>
+    <string name="saturation">Saturation: </string>
+    <string name="name">Name: </string>
+    <string name="modelID">ModelID: </string>
+    <string name="manufacturerName">ManufacturerName: </string>
+    <string name="productName">ProductName: </string>
+    <string name="state">State: </string>
+    <string name="ID">ID: </string>
+    <string name="turn_on">Turn on</string>
+    <string name="turn_off">turn off</string>
 </resources>

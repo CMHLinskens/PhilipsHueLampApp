@@ -34,7 +34,6 @@ public class ListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.lamplist_fragment, container, false);
-//        LampItems.add(new LampItem(new Product())); // test
 
         lampRecyclerView = rootView.findViewById(R.id.LampRecycler);
         lampRecyclerView.setHasFixedSize(true);
@@ -47,7 +46,11 @@ public class ListFragment extends Fragment {
         adapter.setOnItemClickListener(new LampAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                ((FragmentActivity) rootView.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LampFragment()).commit();
+                Bundle positionBundle = new Bundle();
+                positionBundle.putInt("position", position);
+                LampFragment lampFragment =  new LampFragment();
+                lampFragment.setArguments(positionBundle);
+                ((FragmentActivity) rootView.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, lampFragment).addToBackStack(null).commit();
             }
         });
         return rootView;

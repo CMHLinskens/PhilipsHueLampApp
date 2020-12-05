@@ -26,7 +26,7 @@ public class Config {
     @JsonProperty("direction")
     private String direction;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("archetype")
     public String getArchetype() {

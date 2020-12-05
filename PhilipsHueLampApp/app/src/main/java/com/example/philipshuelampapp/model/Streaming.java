@@ -23,7 +23,7 @@ public class Streaming {
     @JsonProperty("proxy")
     private Boolean proxy;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("renderer")
     public Boolean getRenderer() {

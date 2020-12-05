@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PhilipsHueLampApp</string>
+    <string name="color">Tint: </string>
+    <string name="brightness">Helderheid: </string>
+    <string name="saturation">Verzadiging: </string>
+    <string name="name">Naam: </string>
+    <string name="modelID">ModelID: </string>
+    <string name="manufacturerName">FabrikantNaam: </string>
+    <string name="productName">ProductNaam: </string>
+    <string name="state">Staat: </string>
+    <string name="ID">ID: </string>
+</resources>

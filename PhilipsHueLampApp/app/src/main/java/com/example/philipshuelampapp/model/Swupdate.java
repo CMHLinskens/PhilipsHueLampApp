@@ -23,7 +23,7 @@ public class Swupdate {
     @JsonProperty("lastinstall")
     private String lastinstall;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("state")
     public String getState() {

@@ -59,18 +59,21 @@ public class MainActivity extends AppCompatActivity implements ILampManager {
     @Override
     public void setBrightness(Product lamp, int value) {
         lamp.getState().setBri(value);
-        hueEmulatorService.setLightBrightness(lamp == lamps.getProduct()? "1" : lamp == lamps.getProduct2()? "2" : "3", value);
+        if(lamp.getState().getOn())
+            hueEmulatorService.setLightBrightness(lamp == lamps.getProduct()? "1" : lamp == lamps.getProduct2()? "2" : "3", value);
     }
 
     @Override
     public void setHue(Product lamp, int value) {
         lamp.getState().setHue(value);
-        hueEmulatorService.setLightHue(lamp == lamps.getProduct()? "1" : lamp == lamps.getProduct2()? "2" : "3", value);
+        if(lamp.getState().getOn())
+            hueEmulatorService.setLightHue(lamp == lamps.getProduct()? "1" : lamp == lamps.getProduct2()? "2" : "3", value);
     }
 
     @Override
     public void setSaturation(Product lamp, int value) {
         lamp.getState().setSat(value);
-        hueEmulatorService.setLightSaturation(lamp == lamps.getProduct()? "1" : lamp == lamps.getProduct2()? "2" : "3", value);
+        if(lamp.getState().getOn())
+            hueEmulatorService.setLightSaturation(lamp == lamps.getProduct()? "1" : lamp == lamps.getProduct2()? "2" : "3", value);
     }
 }

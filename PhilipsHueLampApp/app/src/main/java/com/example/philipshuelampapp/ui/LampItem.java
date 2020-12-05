@@ -11,7 +11,7 @@ import com.example.philipshuelampapp.model.State;
 import com.example.philipshuelampapp.model.Swupdate;
 
 public class LampItem {
-    private Product lamp;
+    private final Product lamp;
 //    private String name;
 //    private String modelid;
 //    private String productname;
