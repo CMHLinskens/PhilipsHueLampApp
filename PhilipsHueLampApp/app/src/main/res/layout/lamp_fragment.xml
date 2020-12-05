@@ -122,7 +122,7 @@
         android:layout_marginHorizontal="20dp"
 
         android:layout_marginBottom="35dp"
-        app:layout_constraintBottom_toTopOf="@+id/onOrOffButton"
+        app:layout_constraintBottom_toTopOf="@+id/powerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent">
@@ -153,7 +153,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/onOrOffButton"
+        android:id="@+id/powerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"

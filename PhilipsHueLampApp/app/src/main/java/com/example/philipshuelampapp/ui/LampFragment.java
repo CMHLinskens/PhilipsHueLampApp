@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -33,6 +34,8 @@ public class LampFragment extends Fragment {
     private SeekBar colorSlider;
     private SeekBar brightnessSlider;
     private SeekBar saturationSlider;
+    private Button powerButton;
+    private boolean power;
 
 
     @Nullable
@@ -45,6 +48,7 @@ public class LampFragment extends Fragment {
 
         initializeSliders(view, lamp);
         initializeTextViews(view, lamp);
+        initializeButtons(view, lamp);
 
         return view;
     }
@@ -136,5 +140,27 @@ public class LampFragment extends Fragment {
         brightnessTextView.setText(brightness);
         String saturation = getString(R.string.saturation) + "?";
         saturationTextView.setText(saturation);
+    }
+
+    private void initializeButtons(View view, Product lamp) {
+        powerButton = view.findViewById(R.id.powerButton);
+        if (lamp.getState().getOn())
+            powerButton.setText(getString(R.string.turn_on));
+        else
+            powerButton.setText(getString(R.string.turn_off));
+
+        powerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (lamp.getState().getOn()) {
+                    lampManager.setPowerState(lamp, false);
+                    powerButton.setText(getString(R.string.turn_on));
+                }
+                else {
+                    lampManager.setPowerState(lamp, true);
+                    powerButton.setText(getString(R.string.turn_off));
+                }
+            }
+        });
     }
 }
