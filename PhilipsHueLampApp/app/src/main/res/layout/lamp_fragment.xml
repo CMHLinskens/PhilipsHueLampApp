@@ -60,6 +60,7 @@
                 android:id="@+id/colorSlider"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:theme="@style/MySeekBar"
                 android:layout_marginHorizontal="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
  />
@@ -99,6 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginHorizontal="10dp"
+                android:theme="@style/MySeekBar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -137,6 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginHorizontal="10dp"
+                android:theme="@style/MySeekBar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
