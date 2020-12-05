@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import com.example.philipshuelampapp.ILampManager;
 import com.example.philipshuelampapp.R;
 import com.example.philipshuelampapp.model.Product;
-import com.google.android.material.slider.Slider;
 
 import java.util.ArrayList;
 
@@ -30,9 +30,9 @@ public class LampFragment extends Fragment {
     private TextView colorTextView;
     private TextView brightnessTextView;
     private TextView saturationTextView;
-    private Slider colorSlider;
-    private Slider brightnessSlider;
-    private Slider saturationSlider;
+    private SeekBar colorSlider;
+    private SeekBar brightnessSlider;
+    private SeekBar saturationSlider;
 
 
     @Nullable
@@ -61,11 +61,52 @@ public class LampFragment extends Fragment {
 
     private void initializeSliders(View view, Product lamp){
         colorSlider = view.findViewById(R.id.colorSlider);
-        colorSlider.setValue((float) (lamp.getState().getHue() / 65534.0));
+        colorSlider.setProgress((int) (lamp.getState().getHue() / 65534.0));
         brightnessSlider = view.findViewById(R.id.brightnessSlider);
-        brightnessSlider.setValue((float) (lamp.getState().getBri() / 254.0));
+        brightnessSlider.setProgress((int) (lamp.getState().getBri() / 254.0));
         saturationSlider = view.findViewById(R.id.saturationSlider);
-        saturationSlider.setValue((float) (lamp.getState().getSat() / 254.0));
+        saturationSlider.setProgress((int) (lamp.getState().getSat() / 254.0));
+
+        colorSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                lampManager.setHue(lamp, progress * 65534);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        brightnessSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                lampManager.setBrightness(lamp, progress * 254);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {            }
+        });
+
+        saturationSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                lampManager.setSaturation(lamp, progress * 254);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {            }
+        });
     }
 
     private void initializeTextViews(View view, Product lamp) {

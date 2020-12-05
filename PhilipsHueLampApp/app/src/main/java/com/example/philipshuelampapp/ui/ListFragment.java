@@ -50,7 +50,7 @@ public class ListFragment extends Fragment {
                 positionBundle.putInt("position", position);
                 LampFragment lampFragment =  new LampFragment();
                 lampFragment.setArguments(positionBundle);
-                ((FragmentActivity) rootView.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, lampFragment).commit();
+                ((FragmentActivity) rootView.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, lampFragment).addToBackStack(null).commit();
             }
         });
         return rootView;
