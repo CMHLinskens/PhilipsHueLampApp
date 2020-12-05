@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">PhilipsHueLampApp</string>
-    <string name="color">Color: </string>
+    <string name="color">Hue: </string>
     <string name="brightness">Brightness: </string>
     <string name="saturation">Saturation: </string>
     <string name="name">Name: </string>

@@ -39,8 +39,9 @@ public class LampFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lamp_fragment, container, false);
-        if (savedInstanceState != null)
-        lamp = lamps.get((int)savedInstanceState.get("position")).getLamp();
+        Bundle bundle = this.getArguments();
+        if (bundle != null)
+            lamp = lamps.get(bundle.getInt("position")).getLamp();
 
         initializeSliders(view, lamp);
         initializeTextViews(view, lamp);
